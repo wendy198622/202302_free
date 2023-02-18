@@ -12,25 +12,25 @@ img {
   display: block;
 }
 
-.pc {
-  display: block !important;
+body {
+  font-family: 'Noto Sans TC', serif;
 }
 
 .mob {
+  display: block !important;
+}
+
+.pc {
   display: none !important;
 }
 
-@media (max-width: 800px) {
-  .pc {
+@media (min-width: 800px) {
+  .mob {
     display: none !important;
   }
-  .mob {
+  .pc {
     display: block !important;
   }
-}
-
-body {
-  font-family: 'Noto Sans TC', serif;
 }
 
 @font-face {
@@ -152,24 +152,10 @@ body {
   margin: 0 auto;
 }
 
-.theme1 .title .mob {
-  display: block;
-}
-
-.theme1 .title .pc {
-  display: none;
-}
-
 @media (min-width: 800px) {
   .theme1 .title {
     max-width: 800px;
     margin: 0 auto;
-  }
-  .theme1 .title .mob {
-    display: none;
-  }
-  .theme1 .title .pc {
-    display: block;
   }
 }
 
@@ -214,7 +200,7 @@ body {
 }
 
 .theme2 .txt {
-  width: calc(320 / 460 * 100%);
+  width: calc(380 / 460 * 100%);
   margin: 30px auto 50px;
 }
 
@@ -248,7 +234,7 @@ body {
 }
 
 .theme3 .subtitle {
-  width: calc(320 / 460 * 100%);
+  width: calc(360 / 460 * 100%);
   margin: 50px auto 0;
   position: relative;
   z-index: 2;
@@ -262,7 +248,7 @@ body {
 
 .theme3 .photo {
   width: 100%;
-  margin-top: -100px;
+  margin-top: -30px;
 }
 
 .theme4 {
@@ -294,6 +280,7 @@ body {
 
 .theme4 .photo {
   width: 100%;
+  position: relative;
 }
 
 @media (min-width: 800px) {
@@ -301,6 +288,20 @@ body {
     width: 50%;
     float: left;
   }
+}
+
+.theme4 .photo .top {
+  width: 80px;
+  height: 80px;
+  padding: 10px;
+  position: absolute;
+  right: 10px;
+  bottom: 20px;
+  z-index: 10;
+}
+
+.theme4 .photo .top i {
+  font-size: 60px;
 }
 
 .theme4 .block {
@@ -391,15 +392,28 @@ body {
 }
 
 .theme5 .block .txt {
-  width: 40%;
+  width: 45%;
   float: left;
   padding: 0 2%;
 }
 
+@media (min-width: 800px) {
+  .theme5 .block .txt {
+    width: 90%;
+  }
+}
+
 .theme5 .block .photo {
-  width: 60%;
+  width: 55%;
   float: left;
   padding: 0 2%;
+}
+
+@media (min-width: 800px) {
+  .theme5 .block .photo {
+    width: 100%;
+    margin-top: 40px;
+  }
 }
 
 .theme6 {
@@ -425,7 +439,7 @@ body {
 }
 
 .theme6 .groupbox {
-  width: calc(360 / 460 * 100%);
+  width: calc(400 / 460 * 100%);
   margin: 0 auto;
   overflow: hidden;
 }
@@ -441,32 +455,36 @@ body {
   width: 50%;
   margin: 20px auto 0;
   float: left;
-  padding: 20px;
-  border-right: 1px solid #B18053;
+  padding: 0 20px 20px 20px;
   overflow: hidden;
 }
 
+.theme6 .groupbox .group:nth-child(1) {
+  padding-left: 0;
+}
+
 .theme6 .groupbox .group:nth-child(2) {
-  border-right: 0;
+  border-left: 1px solid #B18053;
+  padding-right: 0;
 }
 
 .theme6 .groupbox .group .txt {
   width: 100%;
   float: left;
   padding: 0 2%;
-  padding-top: 20px;
+  padding-top: 40px;
 }
 
 .theme6 .groupbox .group .photo {
   width: 100%;
   float: left;
   padding: 0 2%;
-  padding-top: 20px;
+  padding-top: 40px;
 }
 
 .theme6 .block {
   width: calc(380 / 460 * 100%);
-  margin: 20px auto 0;
+  margin: 40px auto 0;
   overflow: hidden;
 }
 
@@ -804,33 +822,48 @@ body {
   visibility: visible;
 }
 
-.privacy_theme {
+.popup_photo {
   width: 100%;
-  max-width: 1200px;
+  max-width: 100%;
   margin: 0 auto;
-  padding: 20px;
-  color: #000;
+  min-height: 100%;
+  position: fixed;
+  z-index: 200;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transition: all .5s;
+  transition: all .5s;
 }
 
-.privacy_theme h2 {
-  text-align: center;
-  font-size: 36px;
-  margin: 40px;
+.popup_photo img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  position: absolute;
+  margin: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
 }
 
-.privacy_theme h3 {
-  font-size: 24px;
-  margin-top: 40px;
+.popup_photo .popup_close {
+  width: 24px;
+  height: 24px;
+  display: block;
+  color: #fff;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  cursor: pointer;
 }
 
-.privacy_theme p {
-  text-align: justify;
-  font-size: 20px;
-  margin-top: 20px;
-  color: #787878;
-}
-
-.slick-slide > div > div {
-  margin-bottom: -4px;
+.popup_photo.is_acted {
+  opacity: 1;
+  visibility: visible;
 }
 /*# sourceMappingURL=style.css.map */

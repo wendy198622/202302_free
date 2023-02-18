@@ -100,7 +100,8 @@
                 <div class="subtitle">
                     <img class="wow fadeInRight" data-wow-duration="1s" data-wow-delay="1s" src="img/theme4_subtitle.svg" alt="">
                 </div>
-                <div class="photo">
+                <div class="photo open_popup">
+                    <div class="top"><i class="fa fa-search-plus" aria-hidden="true"></i></div>
                     <img class="wow fadeInDown" src="img/theme4_img.jpg" alt="">
                 </div>
                 <div class="block">
@@ -140,7 +141,8 @@
                 </div>
                 <div class="block">
                         <div class="txt">
-                            <img class="wow fadeInDown" src="img/theme5_txt3.svg" alt="">
+                            <img class="wow fadeInDown mob" src="img/theme5_txt3_pc.svg" alt="">
+                            <img class="wow fadeInDown pc" src="img/theme5_txt3.svg" alt="">
                         </div>
                     <div class="photo">
                         <img class="wow fadeInDown" src="img/theme5_img3.jpg" alt="">
@@ -238,6 +240,12 @@
                 {{msg}}
             </div>
         </section>
+
+        <section class="popup_photo">
+                <i class="material-icons popup_close">close</i>
+                <img class="targetImg" src="img/theme4_img.jpg" alt="">
+                
+        </section>
     </div>
 </body>
 <script>
@@ -250,17 +258,26 @@
             slidesToShow: 1,
             slidesToScroll: 1
         });
-        
-        var myFullpage = new fullpage('#fullpage', {
-            anchors: ['01', '02', '03', '04', '05', '06', '07', '08'],
-            sectionsColor: ['#151765', '#fff', '#fff', '#fff', '#fff', '#fff', '#151765'],
-            navigation: false,
-            // navigationPosition: 'right',
-            navigationTooltips: ['01', '02', '03', '04', '05', '06', '07', '08'],
-            scrollBar: true,
-            autoScrolling: true
-            // responsiveWidth: 960
+
+        $('.open_popup').on('click', function (event) {
+            $('.popup_photo').addClass('is_acted')
         });
+
+        $('.popup_close').on('click', function () {
+            $('.popup_photo').removeClass('is_acted')
+            //$('.targetImg').remove()
+        });
+        
+        // var myFullpage = new fullpage('#fullpage', {
+        //     anchors: ['01', '02', '03', '04', '05', '06', '07', '08'],
+        //     sectionsColor: ['#151765', '#fff', '#fff', '#fff', '#fff', '#fff', '#151765'],
+        //     navigation: false,
+            // navigationPosition: 'right',
+            // navigationTooltips: ['01', '02', '03', '04', '05', '06', '07', '08'],
+            // scrollBar: true,
+            // autoScrolling: true
+            // responsiveWidth: 960
+        // });
     });
 
     new Vue({
