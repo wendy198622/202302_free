@@ -289,7 +289,8 @@
             phone: "",
             time: "",
             needInfo: "是",
-            infoIndex: 0 // 0=關閉
+            infoIndex: 0, // 0=關閉
+            msg:""
         },
         created() {},
         methods: {
@@ -307,8 +308,6 @@
                     "手機:" + self.phone + "\n" +
                     "時間:" + self.time + "\n" ;
 
-                console.log(content)
-
                 // if (!self.check) {
                 //     self.popupIndex = 10
                 //     self.msg = "請勾選同意本公司個資保護條款。"
@@ -320,15 +319,19 @@
 
                 self.msg = "表單傳送中...。"
                 self.popupIndex = 10
-                fetch('https://script.google.com/macros/s/AKfycbw58mSxCKG6HHBf6c_1vWssTf6W9xns-PK8cRTYJOXF6FyQGVZcw7j-al6-YbbJ6Lp3WA/exec?subject=' + Base64.encodeURI(subject) + '&body=' + Base64.encodeURI(content) + "&to=" + Base64.encodeURI(tomail), {
+                fetch('http://gn01658704.lionfree.net/mail.php', {
+                        method: "POST",
                         headers: {
                             "Content-Type": "application/x-www-form-urlencoded",
-                            "sec-fetch-mode": "no-cors"
-                        }
+                        },
+                        body: new URLSearchParams({
+                            subject: subject,
+                            body: content,
+                            to: tomail
+                        }).toString()
                     })
                     .then(response => response.json())
                     .then(function(myJson) {
-                        console.log(myJson);
                         if (myJson.code == 200) {
                             self.msg = "系統已送出您的表單。"
                             setTimeout(function() {
@@ -338,6 +341,24 @@
                             self.msg = "表單送出失敗，請重新送出。"
                         }
                     });
+                // fetch('https://script.google.com/macros/s/AKfycbw58mSxCKG6HHBf6c_1vWssTf6W9xns-PK8cRTYJOXF6FyQGVZcw7j-al6-YbbJ6Lp3WA/exec?subject=' + Base64.encodeURI(subject) + '&body=' + Base64.encodeURI(content) + "&to=" + Base64.encodeURI(tomail), {
+                //         headers: {
+                //             "Content-Type": "application/x-www-form-urlencoded",
+                //             "sec-fetch-mode": "no-cors"
+                //         }
+                //     })
+                //     .then(response => response.json())
+                //     .then(function(myJson) {
+                //         console.log(myJson);
+                //         if (myJson.code == 200) {
+                //             self.msg = "系統已送出您的表單。"
+                //             setTimeout(function() {
+                //                 self.popupIndex = 0
+                //             }, 3000);
+                //         } else {
+                //             self.msg = "表單送出失敗，請重新送出。"
+                //         }
+                //     });
             },
             enterInfoDailog: function(inedx) {
 
