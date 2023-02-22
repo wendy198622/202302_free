@@ -300,7 +300,8 @@
             },
             sendEmail: function() {
                 var self = this;
-                var tomail = "neovision003@gmail.com" //信箱
+                var tomail = "neovision003@gmail.com,g6momo@gmail.com" //信箱 
+                var to_name = "新理想建設" //信件名稱
 
                 var subject = "我要預約自由之丘看房" //信件主旨
                 var content = "姓名:" + self.name + "\n" +
@@ -319,7 +320,7 @@
 
                 self.msg = "表單傳送中...。"
                 self.popupIndex = 10
-                fetch('http://gn01658704.lionfree.net/mail.php', {
+                fetch('https://gn01658704.lionfree.net/mailV2.php', {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/x-www-form-urlencoded",
@@ -327,11 +328,13 @@
                         body: new URLSearchParams({
                             subject: subject,
                             body: content,
-                            to: tomail
+                            to: tomail,
+                            to_name: to_name
                         }).toString()
                     })
                     .then(response => response.json())
                     .then(function(myJson) {
+                        console.log(myJson)
                         if (myJson.code == 200) {
                             self.msg = "系統已送出您的表單。"
                             setTimeout(function() {
